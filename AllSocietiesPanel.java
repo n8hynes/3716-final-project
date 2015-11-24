@@ -31,7 +31,6 @@ public class AllSocietiesPanel extends JPanel {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(title, BorderLayout.NORTH);
         JScrollPane scroll = new JScrollPane(list);
-        // scroll.add(list);
         this.add(scroll, BorderLayout.CENTER);
         homeButton = new JButton("Home");
         this.add(homeButton, BorderLayout.SOUTH);

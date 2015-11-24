@@ -30,21 +30,28 @@ public class MunSocManFrame extends JFrame {
     private JPanel content;
     private HomePanel home;
     private AllSocietiesPanel allSocieties;
+    private MySocietiesPanel mySocieties;
     private CreateSocietyPanel createSociety;
-    private ActionListener allSocietiesAction;
     private ActionListener homeAction;
+    private ActionListener allSocietiesAction;
+    private ActionListener mySocietiesAction;
     private ActionListener createAction;
 
     public MunSocManFrame() {
 
+        homeAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                home();
+            }
+        };
         allSocietiesAction = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 allSoc();
             }
         };
-        homeAction = new ActionListener() {
+        mySocietiesAction = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                home();
+                mySoc();
             }
         };
         createAction = new ActionListener() {
@@ -67,9 +74,15 @@ public class MunSocManFrame extends JFrame {
 
         home = new HomePanel(socMan);
         home.getAllSocButton().addActionListener(allSocietiesAction);
+        home.getMySocButton().addActionListener(mySocietiesAction);
         home.getCreateSocButton().addActionListener(createAction);
+
         allSocieties = new AllSocietiesPanel(socMan, user);
         allSocieties.getHomeButton().addActionListener(homeAction);
+
+        mySocieties = new MySocietiesPanel(socMan, user);
+        mySocieties.getHomeButton().addActionListener(homeAction);
+
         createSociety = new CreateSocietyPanel(socMan, user);
         createSociety.getHomeButton().addActionListener(homeAction);
         createSociety.getSubmitButton().addActionListener(homeAction);
@@ -86,6 +99,7 @@ public class MunSocManFrame extends JFrame {
         socMenu.add(allSocItem);
 
         JMenuItem mySocItem = new JMenuItem("My Societies");
+        mySocItem.addActionListener(mySocietiesAction);
         socMenu.add(mySocItem);
 
         JMenuItem createSocItem = new JMenuItem("Create Society");
@@ -107,6 +121,13 @@ public class MunSocManFrame extends JFrame {
         return socMan;
     }
 
+    public void home() {
+        content.removeAll();
+        content.add(home);
+        content.revalidate();
+        content.repaint();
+    }
+
     public void allSoc() {
         content.removeAll();
         allSocieties.update(socMan, user);
@@ -115,9 +136,10 @@ public class MunSocManFrame extends JFrame {
         content.repaint();
     }
 
-    public void home() {
+    public void mySoc() {
         content.removeAll();
-        content.add(home);
+        mySocieties.update(socMan, user);
+        content.add(mySocieties);
         content.revalidate();
         content.repaint();
     }
