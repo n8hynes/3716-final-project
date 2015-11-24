@@ -45,8 +45,8 @@ public class Student extends Person implements java.io.Serializable {
     }
 
     public Student(){
-    	this.studentID = "123";
-    	this.major = "456";
-    	this.societies = new ArrayList<Membership>();
+        this.studentID = "123";
+        this.major = "456";
+        this.societies = new ArrayList<Membership>();
     }
 }
