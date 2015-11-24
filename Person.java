@@ -16,4 +16,6 @@ public class Person {
         this.name = name;
     }
 
+    //Empty constructor needed for serialization of subclass Student.
+    public Person(){}
 }
