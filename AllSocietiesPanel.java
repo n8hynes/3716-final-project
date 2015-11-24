@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -14,22 +13,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.ScrollPane;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class AllSocietiesPanel extends JPanel {
 
-    private JPanel list = new JPanel();
+    private JPanel list;
     private JButton homeButton;
 
     public AllSocietiesPanel(SocietyManager socMan, Student user) {
+        list = new JPanel();
         getList(socMan, user, socMan.getSocieties().size());
         this.setLayout(new BorderLayout());
         JLabel title = new JLabel("All Societies");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(title, BorderLayout.NORTH);
-        ScrollPane scroll = new ScrollPane();
-        scroll.add(list);
+        JScrollPane scroll = new JScrollPane(list);
+        // scroll.add(list);
         this.add(scroll, BorderLayout.CENTER);
         homeButton = new JButton("Home");
         this.add(homeButton, BorderLayout.SOUTH);
@@ -41,6 +43,7 @@ public class AllSocietiesPanel extends JPanel {
 
     public void update(SocietyManager socMan, Student user) {
         getList(socMan, user, socMan.getSocieties().size());
+        this.revalidate();
         this.repaint();
     }
 
@@ -51,11 +54,15 @@ public class AllSocietiesPanel extends JPanel {
             SocietyPanel soc = new SocietyPanel(s);
             soc.getJoinButton().addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    int n = s.getMembers().size();
                     socMan.addMembership(s, user);
-                    JOptionPane.showMessageDialog(null, "You have successfully joined " + s.getName() + "!");
+                    if (s.getMembers().size() > n) JOptionPane.showMessageDialog(null, "You have successfully joined " + s.getName() + "!");
+                    else JOptionPane.showMessageDialog(null, "You're already a member of " + s.getName() + "!");
+                    update(socMan, user);
                 }
             });
             list.add(soc);
         }
     }
+
 }

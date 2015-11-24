@@ -30,18 +30,28 @@ public class MunSocManFrame extends JFrame {
     private JPanel content;
     private HomePanel home;
     private AllSocietiesPanel allSocieties;
-    private ActionListener allSocietiesAction = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            allSoc();
-        }
-    };
-    private ActionListener homeAction = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            home();
-        }
-    };
+    private CreateSocietyPanel createSociety;
+    private ActionListener allSocietiesAction;
+    private ActionListener homeAction;
+    private ActionListener createAction;
 
     public MunSocManFrame() {
+
+        allSocietiesAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                allSoc();
+            }
+        };
+        homeAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                home();
+            }
+        };
+        createAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                create();
+            }
+        };
 
         socMan = initSocMan();
         user = new Student("John Doe", "123", "Computer Science");
@@ -54,8 +64,15 @@ public class MunSocManFrame extends JFrame {
         content.setBorder(new EmptyBorder(5, 5, 5, 5));
         content.setLayout(new BorderLayout());
         setContentPane(content);
+
         home = new HomePanel(socMan);
+        home.getAllSocButton().addActionListener(allSocietiesAction);
+        home.getCreateSocButton().addActionListener(createAction);
         allSocieties = new AllSocietiesPanel(socMan, user);
+        allSocieties.getHomeButton().addActionListener(homeAction);
+        createSociety = new CreateSocietyPanel(socMan, user);
+        createSociety.getHomeButton().addActionListener(homeAction);
+        createSociety.getSubmitButton().addActionListener(homeAction);
         home();
 
         JMenuBar menuBar = new JMenuBar();
@@ -72,11 +89,13 @@ public class MunSocManFrame extends JFrame {
         socMenu.add(mySocItem);
 
         JMenuItem createSocItem = new JMenuItem("Create Society");
+        createSocItem.addActionListener(createAction);
         socMenu.add(createSocItem);
 
     }
 
     public SocietyManager initSocMan() {
+        // Dummy data for now, will eventually read information from persistent storage.
         SocietyManager socMan = new SocietyManager();
         socMan.addStudent(new Student("Tim", "123", "Computer Science"));
         socMan.addStudent(new Student("Lorem", "321", "English"));
@@ -91,7 +110,6 @@ public class MunSocManFrame extends JFrame {
     public void allSoc() {
         content.removeAll();
         allSocieties.update(socMan, user);
-        allSocieties.getHomeButton().addActionListener(homeAction);
         content.add(allSocieties);
         content.revalidate();
         content.repaint();
@@ -99,8 +117,14 @@ public class MunSocManFrame extends JFrame {
 
     public void home() {
         content.removeAll();
-        home.getAllSocButton().addActionListener(allSocietiesAction);
         content.add(home);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void create() {
+        content.removeAll();
+        content.add(createSociety);
         content.revalidate();
         content.repaint();
     }
