@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class MySocietiesPanel extends JPanel {
@@ -41,7 +44,16 @@ public class MySocietiesPanel extends JPanel {
         list.setLayout(new GridLayout(n, 1));
         for (Membership m : user.getSocieties()) {
             SocietyPanel soc = new SocietyPanel(m.getSociety());
-            soc.remove(soc.getJoinButton());
+            soc.getButton().setText("Leave");
+            soc.getButton().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    int n = m.getSociety().getMembers().size();
+                    socMan.removeMembership(m);
+                    if (m.getSociety().getMembers().size() < n) JOptionPane.showMessageDialog(null, "You have successfully left " + m.getSociety().getName() + "!");
+                    else JOptionPane.showMessageDialog(null, "Error leaving " + m.getSociety().getName());
+                    update(socMan, user);
+                }
+            });
             list.add(soc);
         }
     }

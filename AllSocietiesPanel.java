@@ -51,7 +51,8 @@ public class AllSocietiesPanel extends JPanel {
         list.setLayout(new GridLayout(n, 1));
         for (Society s : socMan.getSocieties()) {
             SocietyPanel soc = new SocietyPanel(s);
-            soc.getJoinButton().addActionListener(new ActionListener() {
+            soc.getButton().setText("Join");
+            soc.getButton().addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int n = s.getMembers().size();
                     socMan.addMembership(s, user);
