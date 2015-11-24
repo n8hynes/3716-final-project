@@ -1,3 +1,5 @@
+//TODO: disable button when EITHER field is empty.
+
 package MunSocMan;
 
 import javax.swing.JButton;
@@ -14,6 +16,8 @@ import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class CreateSocietyPanel extends JPanel {
@@ -23,14 +27,18 @@ public class CreateSocietyPanel extends JPanel {
 
     public CreateSocietyPanel(SocietyManager socMan, Student user) {
 
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new BorderLayout());
+        JLabel title = new JLabel("Create Society");
+        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(title, BorderLayout.NORTH);
+
+        JPanel form = new JPanel();
+        form.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         Font labelFont = new Font(Font.SANS_SERIF, Font.BOLD, 16);
         Font fieldFont = new Font(Font.MONOSPACED, Font.PLAIN, 16);
-
-        JLabel title = new JLabel("Create Society");
-
 
         JLabel nameLabel = new JLabel("Name: ");
         nameLabel.setFont(labelFont);
@@ -38,7 +46,7 @@ public class CreateSocietyPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0;
-        this.add(nameLabel, c);
+        form.add(nameLabel, c);
 
         JTextField nameField = new JTextField();
         nameField.setFont(fieldFont);
@@ -53,7 +61,7 @@ public class CreateSocietyPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 0;
         c.weightx = 1;
-        this.add(nameField, c);
+        form.add(nameField, c);
 
         JLabel descLabel = new JLabel("Description (300 char max): ");
         descLabel.setFont(labelFont);
@@ -62,7 +70,7 @@ public class CreateSocietyPanel extends JPanel {
         c.gridy = 1;
         c.weightx = 1;
         c.gridwidth = 2;
-        this.add(descLabel, c);
+        form.add(descLabel, c);
 
         JTextArea descArea = new JTextArea();
         descArea.setFont(fieldFont);
@@ -82,7 +90,7 @@ public class CreateSocietyPanel extends JPanel {
         c.weighty = 1;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.BOTH;
-        this.add(descArea, c);
+        form.add(descArea, c);
 
         homeButton = new JButton("Home");
         c.fill = GridBagConstraints.NONE;
@@ -92,7 +100,7 @@ public class CreateSocietyPanel extends JPanel {
         c.weightx = 0;
         c.weighty = 0;
         c.gridwidth = 1;
-        this.add(homeButton, c);
+        form.add(homeButton, c);
 
         submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
@@ -111,7 +119,9 @@ public class CreateSocietyPanel extends JPanel {
         c.gridy = 3;
         c.weighty = 0;
         c.weighty = 0;
-        this.add(submitButton, c);
+        form.add(submitButton, c);
+
+        this.add(form, BorderLayout.CENTER);
 
     }
 
