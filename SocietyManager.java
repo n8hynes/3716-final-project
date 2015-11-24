@@ -12,6 +12,10 @@ public class SocietyManager {
         societies = new ArrayList<Society>();
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
     public ArrayList<Society> getSocieties() {
         return societies;
     }
