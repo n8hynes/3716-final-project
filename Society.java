@@ -2,7 +2,7 @@ package MunSocMan;
 
 import java.util.ArrayList;
 
-public class Society implements Sender {
+public class Society implements Sender, java.io.Serializable {
 
     private String name;
     private String description;
