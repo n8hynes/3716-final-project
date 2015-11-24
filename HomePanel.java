@@ -37,7 +37,7 @@ public class HomePanel extends JPanel {
         return mySocButton;
     }
 
-    public JButton createSocButton() {
+    public JButton getCreateSocButton() {
         return createSocButton;
     }
 
