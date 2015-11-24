@@ -1,26 +1,93 @@
 package MunSocMan;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.ScrollPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class MunSocManFrame extends JFrame {
 
+    private SocietyManager socMan;
+    private Student user;
     private JPanel content;
+    private HomePanel home;
+    private AllSocietiesPanel allSocieties;
+    private MySocietiesPanel mySocieties;
+    private CreateSocietyPanel createSociety;
+    private ActionListener homeAction;
+    private ActionListener allSocietiesAction;
+    private ActionListener mySocietiesAction;
+    private ActionListener createAction;
 
     public MunSocManFrame() {
 
-        content = new JPanel();
-        content.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(content);
-        content.setLayout(new BorderLayout(0, 0));
+        homeAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                home();
+            }
+        };
+        allSocietiesAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                allSoc();
+            }
+        };
+        mySocietiesAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mySoc();
+            }
+        };
+        createAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                create();
+            }
+        };
+
+        socMan = new SocietyManager();
+        user = new Student("John Doe", "123", "Computer Science");
+        socMan.addStudent(user);
+
         setTitle("MunSocMan");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500, 500, 500, 500);
+        content = new JPanel();
+        content.setBorder(new EmptyBorder(5, 5, 5, 5));
+        content.setLayout(new BorderLayout());
+        setContentPane(content);
+
+        home = new HomePanel(socMan);
+        home.getAllSocButton().addActionListener(allSocietiesAction);
+        home.getMySocButton().addActionListener(mySocietiesAction);
+        home.getCreateSocButton().addActionListener(createAction);
+
+        allSocieties = new AllSocietiesPanel(socMan, user);
+        allSocieties.getHomeButton().addActionListener(homeAction);
+
+        mySocieties = new MySocietiesPanel(socMan, user);
+        mySocieties.getHomeButton().addActionListener(homeAction);
+
+        createSociety = new CreateSocietyPanel(socMan, user);
+        createSociety.getHomeButton().addActionListener(homeAction);
+        createSociety.getSubmitButton().addActionListener(homeAction);
+        home();
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -29,11 +96,54 @@ public class MunSocManFrame extends JFrame {
         menuBar.add(socMenu);
 
         JMenuItem allSocItem = new JMenuItem("All Societies");
+        allSocItem.addActionListener(allSocietiesAction);
         socMenu.add(allSocItem);
 
         JMenuItem mySocItem = new JMenuItem("My Societies");
+        mySocItem.addActionListener(mySocietiesAction);
         socMenu.add(mySocItem);
 
+        JMenuItem createSocItem = new JMenuItem("Create Society");
+        createSocItem.addActionListener(createAction);
+        socMenu.add(createSocItem);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                socMan.save();
+            }
+        });
+
+    }
+
+    public void home() {
+        content.removeAll();
+        content.add(home);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void allSoc() {
+        content.removeAll();
+        allSocieties.update(socMan, user);
+        content.add(allSocieties);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void mySoc() {
+        content.removeAll();
+        mySocieties.update(socMan, user);
+        content.add(mySocieties);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void create() {
+        content.removeAll();
+        content.add(createSociety);
+        content.revalidate();
+        content.repaint();
     }
 
 }

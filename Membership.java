@@ -1,8 +1,10 @@
 package MunSocMan;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Membership {
+@SuppressWarnings("serial")
+public class Membership implements Serializable {
 
     private boolean feesPaid;
     private Date dateJoined;

@@ -2,6 +2,7 @@ package MunSocMan;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Society implements Sender, java.io.Serializable {
 
     private String name;
