@@ -2,6 +2,7 @@ package MunSocMan;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Student extends Person implements java.io.Serializable {
 
     private String studentID;
@@ -14,7 +15,7 @@ public class Student extends Person implements java.io.Serializable {
         this.major = major;
         this.societies = new ArrayList<Membership>();
     }
-    
+
     public String getStudentID() {
         return studentID;
     }

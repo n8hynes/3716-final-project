@@ -19,7 +19,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -60,7 +61,7 @@ public class MunSocManFrame extends JFrame {
             }
         };
 
-        socMan = initSocMan();
+        socMan = new SocietyManager();
         user = new Student("John Doe", "123", "Computer Science");
         socMan.addStudent(user);
 
@@ -106,19 +107,13 @@ public class MunSocManFrame extends JFrame {
         createSocItem.addActionListener(createAction);
         socMenu.add(createSocItem);
 
-    }
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                socMan.save();
+            }
+        });
 
-    public SocietyManager initSocMan() {
-        // Dummy data for now, will eventually read information from persistent storage.
-        SocietyManager socMan = new SocietyManager();
-        socMan.addStudent(new Student("Tim", "123", "Computer Science"));
-        socMan.addStudent(new Student("Lorem", "321", "English"));
-        int i=1;
-        for (Student s : socMan.getStudents()) {
-            socMan.addSociety("Society " + i, "Test society number " + i, s);
-            i++;
-        }
-        return socMan;
     }
 
     public void home() {

@@ -1,8 +1,10 @@
 package MunSocMan;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Board {
+@SuppressWarnings("serial")
+public class Board implements Serializable {
 
     ArrayList<BoardPosition> positions;
     ArrayList<PositionType> types;

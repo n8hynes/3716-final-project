@@ -29,12 +29,16 @@ public class SocietyManager {
 			if (stuFile.isFile()){
 				stuInputStream = new FileInputStream(stuFile);
 				stuIn = new ObjectInputStream(stuInputStream);
-				students = (ArrayList<Student>) stuIn.readObject();
+                @SuppressWarnings("unchecked")
+                ArrayList<Student> deserializedStu = (ArrayList<Student>) stuIn.readObject();
+                students = deserializedStu;
 			}
 			if (socFile.isFile()){
 				socInputStream = new FileInputStream(socFile);
 				socIn = new ObjectInputStream(socInputStream);
-				societies = (ArrayList<Society>) socIn.readObject();
+                @SuppressWarnings("unchecked")
+                ArrayList<Society> deserializedSoc = (ArrayList<Society>) socIn.readObject();
+                societies = deserializedSoc;
 			}
 		}
 		//IOException, ClassNotFoundException
