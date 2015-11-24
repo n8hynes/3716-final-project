@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class SocietyPanel extends JPanel {
 
-    private JButton joinButton;
+    private JButton button;
 
     public SocietyPanel(Society s) {
         GridBagLayout societyLayout = new GridBagLayout();
@@ -27,12 +27,12 @@ public class SocietyPanel extends JPanel {
         membersConstraints.weightx = 1;
         membersConstraints.gridx = 1;
         membersConstraints.gridy = 0;
-        GridBagConstraints joinConstraints = new GridBagConstraints();
-        joinConstraints.anchor = GridBagConstraints.LINE_END;
-        joinConstraints.gridwidth = 1;
-        joinConstraints.weightx = 0;
-        joinConstraints.gridx = 2;
-        joinConstraints.gridy = 0;
+        GridBagConstraints buttonConstraints = new GridBagConstraints();
+        buttonConstraints.anchor = GridBagConstraints.LINE_END;
+        buttonConstraints.gridwidth = 1;
+        buttonConstraints.weightx = 0;
+        buttonConstraints.gridx = 2;
+        buttonConstraints.gridy = 0;
         GridBagConstraints descConstraints = new GridBagConstraints();
         descConstraints.anchor = GridBagConstraints.LINE_START;
         descConstraints.gridwidth = 2;
@@ -49,14 +49,14 @@ public class SocietyPanel extends JPanel {
         JLabel members = new JLabel(s.getMembers().size() + " member(s)");
         members.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 12));
         this.add(members, membersConstraints);
-        joinButton = new JButton("Join");
-        this.add(joinButton, joinConstraints);
+        button = new JButton();
+        this.add(button, buttonConstraints);
         JLabel desc = new JLabel(s.getDescription());
         desc.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         this.add(desc, descConstraints);
     }
 
-    public JButton getJoinButton() {
-        return joinButton;
+    public JButton getButton() {
+        return button;
     }
 }
