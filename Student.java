@@ -42,7 +42,7 @@ public class Student extends Person implements java.io.Serializable {
     public void removeSociety(Membership m) {
         societies.remove(m);
     }
-    
+
     public Student(){
     	this.studentID = "123";
     	this.major = "456";

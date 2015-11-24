@@ -166,5 +166,4 @@ public class SocietyManager {
 		if (society.getMembers().size() < 20 && society.isSanctioned()) society.setSanctioned(false);
 	}
 
-
 }
