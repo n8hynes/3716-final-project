@@ -42,6 +42,13 @@ public class CreateSocietyPanel extends JPanel {
 
         JTextField nameField = new JTextField();
         nameField.setFont(fieldFont);
+        nameField.addCaretListener(new CaretListener() {
+            public void caretUpdate(CaretEvent e) {
+                String text = nameField.getText();
+                if (text.length() == 0) submitButton.setEnabled(false);
+                else submitButton.setEnabled(true);
+            }
+        });
         c.anchor = GridBagConstraints.LINE_END;
         c.gridx = 1;
         c.gridy = 0;
@@ -64,7 +71,7 @@ public class CreateSocietyPanel extends JPanel {
         descArea.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 String text = descArea.getText();
-                if (text.length() > 300) submitButton.setEnabled(false);
+                if ((text.length() > 300) || (text.length() == 0)) submitButton.setEnabled(false);
                 else submitButton.setEnabled(true);
             }
         });
@@ -98,6 +105,7 @@ public class CreateSocietyPanel extends JPanel {
                 descArea.setText("");
             }
         });
+        submitButton.setEnabled(false);
         c.anchor = GridBagConstraints.LINE_END;
         c.gridx = 1;
         c.gridy = 3;
