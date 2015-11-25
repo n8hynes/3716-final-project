@@ -1,5 +1,3 @@
-//TODO: disable button when EITHER field is empty.
-
 package MunSocMan;
 
 import javax.swing.JButton;
@@ -24,6 +22,7 @@ public class CreateSocietyPanel extends JPanel {
 
     private JButton homeButton;
     private JButton submitButton;
+    private JTextArea descArea;
 
     public CreateSocietyPanel(SocietyManager socMan, Student user) {
 
@@ -52,8 +51,7 @@ public class CreateSocietyPanel extends JPanel {
         nameField.setFont(fieldFont);
         nameField.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
-                String text = nameField.getText();
-                if (text.length() == 0) submitButton.setEnabled(false);
+                if ((nameField.getText().length() == 0) || (descArea.getText().length() == 0)) submitButton.setEnabled(false);
                 else submitButton.setEnabled(true);
             }
         });
@@ -72,14 +70,13 @@ public class CreateSocietyPanel extends JPanel {
         c.gridwidth = 2;
         form.add(descLabel, c);
 
-        JTextArea descArea = new JTextArea();
+        descArea = new JTextArea();
         descArea.setFont(fieldFont);
         descArea.setWrapStyleWord(true);
         descArea.setLineWrap(true);
         descArea.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
-                String text = descArea.getText();
-                if ((text.length() > 300) || (text.length() == 0)) submitButton.setEnabled(false);
+                if ((descArea.getText().length() > 300) || (descArea.getText().length() == 0) || (nameField.getText().length() == 0)) submitButton.setEnabled(false);
                 else submitButton.setEnabled(true);
             }
         });
