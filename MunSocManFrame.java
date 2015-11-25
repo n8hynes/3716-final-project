@@ -6,12 +6,9 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.ScrollPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +19,7 @@ import javax.swing.JPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class MunSocManFrame extends JFrame {
@@ -93,17 +91,21 @@ public class MunSocManFrame extends JFrame {
         setJMenuBar(menuBar);
 
         JMenu socMenu = new JMenu("Societies");
+        socMenu.setMnemonic(KeyEvent.VK_S);
         menuBar.add(socMenu);
 
         JMenuItem allSocItem = new JMenuItem("All Societies");
+        allSocItem.setMnemonic(KeyEvent.VK_A);
         allSocItem.addActionListener(allSocietiesAction);
         socMenu.add(allSocItem);
 
         JMenuItem mySocItem = new JMenuItem("My Societies");
+        mySocItem.setMnemonic(KeyEvent.VK_M);
         mySocItem.addActionListener(mySocietiesAction);
         socMenu.add(mySocItem);
 
         JMenuItem createSocItem = new JMenuItem("Create Society");
+        createSocItem.setMnemonic(KeyEvent.VK_C);
         createSocItem.addActionListener(createAction);
         socMenu.add(createSocItem);
 
