@@ -150,6 +150,7 @@ public class SocietyManager {
     public void removeMembership(Membership m) {
         m.getSociety().removeMember(m);
         m.getStudent().removeSociety(m);
+        if (m.getSociety().getMembers().size() < 20) m.getSociety().setSanctioned(false);
     }
 
     public void removeMembership(Society society, Student student) {
@@ -160,7 +161,7 @@ public class SocietyManager {
                 break;
             }
         }
-        if (society.getMembers().size() < 20 && society.isSanctioned()) society.setSanctioned(false);
+        if (society.getMembers().size() < 20) society.setSanctioned(false);
     }
 
     public void addMembership(Society society, Student student) {
