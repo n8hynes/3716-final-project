@@ -8,18 +8,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class InfoPanel extends JPanel {
 
    private JPanel basicInfo, events;
    private JTextArea basicInfoArea, eventsArea;
    private Society society;
-   private boolean userIsMember;
+   private boolean userIsMember,nullUser;
 
-   public InfoPanel(SocietyManager socMan, Student user, Society society){
+   public InfoPanel(Student user, Society society){
+     this.nullUser = false;
+     if (user == null){
+       nullUser = true;
+     }
      this.basicInfo = new JPanel();
      this.events = new JPanel();
      this.society = society;
-     this.userIsMember = user.isMember(society);
+     if (!nullUser){
+       this.userIsMember = user.isMember(society);
+     }
+     else {
+       userIsMember = false;
+     }
      this.basicInfoArea = new JTextArea();
      this.eventsArea = new JTextArea();
 
@@ -29,7 +39,7 @@ public class InfoPanel extends JPanel {
      events.add(eventsArea);
 
      basicInfo.setBackground(this.getBackground());
-     events.setBackground(this.getBackground());     
+     events.setBackground(this.getBackground());
 
      this.setLayout(new GridLayout(0,1));
      this.add(basicInfo);
@@ -38,7 +48,7 @@ public class InfoPanel extends JPanel {
 
    private void getInfo(Student user, Society society){
      String infoString = "Name: " + society.getName() + "\nDescription " + society.getDescription() + "\n\n";
-     if (user.isMember(society)){
+     if (userIsMember){
        infoString += "You are a member of this society.\n";
      }
      else {
