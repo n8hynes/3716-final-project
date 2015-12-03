@@ -58,32 +58,6 @@ public class UserPanel extends JPanel {
         this.add(content, BorderLayout.CENTER);
     }
 
-    public void update(SocietyManager socMan, Student user) {
-        content = new JPanel();
-        content.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 1;
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 0;
-        userList = new JComboBox<Student>();
-        for (Student s : socMan.getStudents()) {
-            userList.addItem(s);
-        }
-        if (user != null) userList.setSelectedItem(user);
-        else userList.setSelectedItem(0);
-        content.add(userList, c);
-        newStudentButton = new JButton("New Student");
-        c.gridwidth = 1;
-        c.weightx = 0.5;
-        c.gridy = 1;
-        content.add(newStudentButton, c);
-        submitButton = new JButton("Submit");
-        c.gridx = 1;
-        content.add(submitButton, c);
-    }
-
     public JButton getSubmitButton() {
         return submitButton;
     }
