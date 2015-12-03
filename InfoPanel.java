@@ -1,6 +1,8 @@
 package MunSocMan;
 
-import java.awt.GridLayout;
+import java.awt.*;
+//import java.awt.Color;
+//import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,10 +22,15 @@ public class InfoPanel extends JPanel {
      this.userIsMember = user.isMember(society);
      this.basicInfoArea = new JTextArea();
      this.eventsArea = new JTextArea();
+
      getInfo(user, society);
      getEvents(society);
      basicInfo.add(basicInfoArea);
      events.add(eventsArea);
+
+     basicInfo.setBackgroundColor(this.getBackgroundColor());
+     events.setBackgroundColor(this.getBackgroundColor());     
+
      this.setLayout(new GridLayout(0,1));
      this.add(basicInfo);
      this.add(events);

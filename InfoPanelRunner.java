@@ -17,6 +17,5 @@ public class InfoPanelRunner {
     frame.setTitle("Society Info");
     frame.setSize(500,500);
     frame.setVisible(true);
-    System.out.println(":)");
   }
 }
