@@ -20,7 +20,9 @@ public class MySocietiesPanel extends JPanel {
 
     public MySocietiesPanel(SocietyManager socMan, Student user) {
         list = new JPanel();
-        getList(socMan, user, user.getSocieties().size());
+        if (user != null) {
+            getList(socMan, user, user.getSocieties().size());
+        }
         this.setLayout(new BorderLayout());
         JLabel title = new JLabel("My Societies");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
@@ -31,10 +33,13 @@ public class MySocietiesPanel extends JPanel {
         homeButton = new JButton("Home");
         this.add(homeButton, BorderLayout.SOUTH);
 
+
     }
 
     public void update(SocietyManager socMan, Student user) {
-        getList(socMan, user, user.getSocieties().size());
+        if (user != null) {
+            getList(socMan, user, user.getSocieties().size());
+        }
         this.revalidate();
         this.repaint();
     }

@@ -3,17 +3,26 @@ package MunSocMan;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Student extends Person implements java.io.Serializable {
+public class Student implements java.io.Serializable {
 
     private String studentID;
     private String major;
+    private String name;
     private ArrayList<Membership> societies;
 
     public Student(String name, String studentID, String major) {
-        super(name);
+        this.name = name;
         this.studentID = studentID;
         this.major = major;
         this.societies = new ArrayList<Membership>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStudentID() {
@@ -44,9 +53,10 @@ public class Student extends Person implements java.io.Serializable {
         societies.remove(m);
     }
 
-    public Student(){
-        this.studentID = "123";
-        this.major = "456";
-        this.societies = new ArrayList<Membership>();
+    @Override
+    public String toString() {
+        String result = name + " | " + studentID + " | " + major;
+        return result;
     }
+
 }
