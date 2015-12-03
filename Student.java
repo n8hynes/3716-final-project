@@ -37,6 +37,15 @@ public class Student implements java.io.Serializable {
         return societies;
     }
 
+    public boolean isMember(Society society){
+	for (Membership m : this.societies){
+		if (m.getSociety().equals(society)){
+			return true;
+		}
+	}
+	return false;
+    }
+
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
