@@ -31,10 +31,12 @@ public class MunSocManFrame extends JFrame {
     private AllSocietiesPanel allSocieties;
     private MySocietiesPanel mySocieties;
     private CreateSocietyPanel createSociety;
+    private UserPanel chooseUser;
     private ActionListener homeAction;
     private ActionListener allSocietiesAction;
     private ActionListener mySocietiesAction;
     private ActionListener createAction;
+    private ActionListener chooseUserAction;
 
     public MunSocManFrame() {
 
@@ -58,10 +60,13 @@ public class MunSocManFrame extends JFrame {
                 create();
             }
         };
+        chooseUserAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                chooseUser();
+            }
+        };
 
         socMan = new SocietyManager();
-        user = new Student("John Doe", "123", "Computer Science");
-        socMan.addStudent(user);
 
         setTitle("MunSocMan");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,21 +76,22 @@ public class MunSocManFrame extends JFrame {
         content.setLayout(new BorderLayout());
         setContentPane(content);
 
-        home = new HomePanel(socMan);
-        home.getAllSocButton().addActionListener(allSocietiesAction);
-        home.getMySocButton().addActionListener(mySocietiesAction);
-        home.getCreateSocButton().addActionListener(createAction);
+        chooseUser = new UserPanel(socMan, user);
+        chooseUser.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                user = (Student) chooseUser.getUserList().getSelectedItem();
+                newUser();
+                home();
+            }
+        });
+        chooseUser.getNewStudentButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newStudent();
+            }
+        });
+        chooseUser();
 
-        allSocieties = new AllSocietiesPanel(socMan, user);
-        allSocieties.getHomeButton().addActionListener(homeAction);
-
-        mySocieties = new MySocietiesPanel(socMan, user);
-        mySocieties.getHomeButton().addActionListener(homeAction);
-
-        createSociety = new CreateSocietyPanel(socMan, user);
-        createSociety.getHomeButton().addActionListener(homeAction);
-        createSociety.getSubmitButton().addActionListener(homeAction);
-        home();
+        initPanels();
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -108,6 +114,15 @@ public class MunSocManFrame extends JFrame {
         createSocItem.setMnemonic(KeyEvent.VK_C);
         createSocItem.addActionListener(createAction);
         socMenu.add(createSocItem);
+
+        JMenu userMenu = new JMenu("Users");
+        userMenu.setMnemonic(KeyEvent.VK_U);
+        menuBar.add(userMenu);
+
+        JMenuItem chooseUserItem = new JMenuItem("Choose User");
+        chooseUserItem.setMnemonic(KeyEvent.VK_L);
+        chooseUserItem.addActionListener(chooseUserAction);
+        userMenu.add(chooseUserItem);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -146,6 +161,65 @@ public class MunSocManFrame extends JFrame {
         content.add(createSociety);
         content.revalidate();
         content.repaint();
+    }
+
+    public void chooseUser() {
+        content.removeAll();
+        content.add(chooseUser);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void newStudent() {
+        NewStudentPanel p = new NewStudentPanel(socMan, user);
+        p.getSubmitButton().addActionListener(new NewStudentActionListener(socMan, user, p, this));
+        content.removeAll();
+        content.add(p);
+        content.revalidate();
+        content.repaint();
+    }
+
+    public void initPanels() {
+        home = new HomePanel(socMan);
+        home.getAllSocButton().addActionListener(allSocietiesAction);
+        home.getMySocButton().addActionListener(mySocietiesAction);
+        home.getCreateSocButton().addActionListener(createAction);
+
+        allSocieties = new AllSocietiesPanel(socMan, user);
+        allSocieties.getHomeButton().addActionListener(homeAction);
+
+        mySocieties = new MySocietiesPanel(socMan, user);
+        mySocieties.getHomeButton().addActionListener(homeAction);
+
+        createSociety = new CreateSocietyPanel(socMan, user);
+        createSociety.getHomeButton().addActionListener(homeAction);
+        createSociety.getSubmitButton().addActionListener(homeAction);
+    }
+
+    public void newUser() {
+        chooseUser = new UserPanel(socMan, user);
+        chooseUser.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                user = (Student) chooseUser.getUserList().getSelectedItem();
+                newUser();
+                home();
+            }
+        });
+        chooseUser.getNewStudentButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newStudent();
+            }
+        });
+
+        allSocieties = new AllSocietiesPanel(socMan, user);
+        allSocieties.getHomeButton().addActionListener(homeAction);
+
+        mySocieties = new MySocietiesPanel(socMan, user);
+        mySocieties.getHomeButton().addActionListener(homeAction);
+
+        createSociety = new CreateSocietyPanel(socMan, user);
+        createSociety.getHomeButton().addActionListener(homeAction);
+        createSociety.getSubmitButton().addActionListener(homeAction);
     }
 
 }
