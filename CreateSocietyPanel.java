@@ -102,12 +102,15 @@ public class CreateSocietyPanel extends JPanel {
         submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int n = socMan.getSocieties().size();
-                socMan.addSociety(nameField.getText(), descArea.getText(), user);
-                if (socMan.getSocieties().size() > n) JOptionPane.showMessageDialog(null, "You've successfully created your new society, " + nameField.getText());
-                else JOptionPane.showMessageDialog(null, "oops");
-                nameField.setText("");
-                descArea.setText("");
+                if (user != null) {
+                    int n = socMan.getSocieties().size();
+                    socMan.addSociety(nameField.getText(), descArea.getText(), user);
+                    if (socMan.getSocieties().size() > n) JOptionPane.showMessageDialog(null, "You've successfully created your new society, " + nameField.getText());
+                    else JOptionPane.showMessageDialog(null, "oops");
+                    nameField.setText("");
+                    descArea.setText("");
+                }
+                else JOptionPane.showMessageDialog(null, "You need to choose a user before you're allowed to do that.");
             }
         });
         submitButton.setEnabled(false);

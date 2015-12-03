@@ -52,11 +52,14 @@ public class MySocietiesPanel extends JPanel {
             soc.getButton().setText("Leave");
             soc.getButton().addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    int n = m.getSociety().getMembers().size();
-                    socMan.removeMembership(m);
-                    if (m.getSociety().getMembers().size() < n) JOptionPane.showMessageDialog(null, "You have successfully left " + m.getSociety().getName() + "!");
-                    else JOptionPane.showMessageDialog(null, "Error leaving " + m.getSociety().getName());
-                    update(socMan, user);
+                    if (user != null) {
+                        int n = m.getSociety().getMembers().size();
+                        socMan.removeMembership(m);
+                        if (m.getSociety().getMembers().size() < n) JOptionPane.showMessageDialog(null, "You have successfully left " + m.getSociety().getName() + "!");
+                        else JOptionPane.showMessageDialog(null, "Error leaving " + m.getSociety().getName());
+                        update(socMan, user);
+                    }
+                    else JOptionPane.showMessageDialog(null, "You need to choose a user before you're allowed to do that.");
                 }
             });
             list.add(soc);

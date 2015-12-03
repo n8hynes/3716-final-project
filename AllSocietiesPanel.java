@@ -54,11 +54,14 @@ public class AllSocietiesPanel extends JPanel {
             soc.getButton().setText("Join");
             soc.getButton().addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    int n = s.getMembers().size();
-                    socMan.addMembership(s, user);
-                    if (s.getMembers().size() > n) JOptionPane.showMessageDialog(null, "You have successfully joined " + s.getName() + "!");
-                    else JOptionPane.showMessageDialog(null, "You're already a member of " + s.getName() + "!");
-                    update(socMan, user);
+                    if (user != null) {
+                        int n = s.getMembers().size();
+                        socMan.addMembership(s, user);
+                        if (s.getMembers().size() > n) JOptionPane.showMessageDialog(null, "You have successfully joined " + s.getName() + "!");
+                        else JOptionPane.showMessageDialog(null, "You're already a member of " + s.getName() + "!");
+                        update(socMan, user);
+                    }
+                    else JOptionPane.showMessageDialog(null, "You need to choose a user before you're allowed to do that.");
                 }
             });
             list.add(soc);
