@@ -8,25 +8,21 @@ import javax.swing.JTextArea;
 
 public class InfoPanel extends JPanel {
 
-   private JPanel basicInfo, board, events;
-   private JTextArea basicInfoArea, boardArea, eventsArea;
+   private JPanel basicInfo, events;
+   private JTextArea basicInfoArea, eventsArea;
    private Society society;
    private boolean userIsMember;
 
    public InfoPanel(SocietyManager socMan, Student user, Society society){
      this.basicInfo = new JPanel();
-     this.board = new JPanel();
      this.events = new JPanel();
      this.society = society;
      this.userIsMember = user.isMember(society);
      this.basicInfoArea = new JTextArea();
-     this.boardArea = new JTextArea();
      this.eventsArea = new JTextArea();
      getInfo(user, society);
-     getBoard(society);
      getEvents(society);
      basicInfo.add(basicInfoArea);
-     board.add(boardArea);
      events.add(eventsArea);
      this.setLayout(new GridLayout(0,1));
      this.add(basicInfo);
@@ -48,15 +44,11 @@ public class InfoPanel extends JPanel {
      else {
        infoString += society.getName() + " is an unsanctioned society.\n";
      }
+     infoString += "Society Leader: " + soceity.getLeader().getStudent().getName() +"\n";
      infoString += "Monthly fees: $" + society.getFeeAmount();
      basicInfoArea.setText(infoString);
    }
 
-   private void getBoard(Society society){
-     String boardText = "";
-     //Missing board conversion logic
-     boardArea.setText(/*boardText**/"Lorem Ipsum");
-   }
 
    private void getEvents(Society society){
      if (society.getEvents().size() == 0){
