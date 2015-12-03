@@ -79,11 +79,9 @@ public class MunSocManFrame extends JFrame {
         chooseUser = new UserPanel(socMan, user);
         chooseUser.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Selected user: " + chooseUser.getUserList().getSelectedItem().toString());
                 user = (Student) chooseUser.getUserList().getSelectedItem();
                 newUser();
                 home();
-                System.out.println("Current user: " + user.toString());
             }
         });
         chooseUser.getNewStudentButton().addActionListener(new ActionListener() {
@@ -202,11 +200,9 @@ public class MunSocManFrame extends JFrame {
         chooseUser = new UserPanel(socMan, user);
         chooseUser.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Selected user: " + chooseUser.getUserList().getSelectedItem().toString());
                 user = (Student) chooseUser.getUserList().getSelectedItem();
                 newUser();
                 home();
-                System.out.println("Current user: " + user.toString());
             }
         });
         chooseUser.getNewStudentButton().addActionListener(new ActionListener() {
