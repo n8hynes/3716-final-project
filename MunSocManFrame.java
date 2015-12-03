@@ -164,6 +164,7 @@ public class MunSocManFrame extends JFrame {
 
     public void chooseUser() {
         content.removeAll();
+        chooseUser.update(socMan, user);
         content.add(chooseUser);
         content.revalidate();
         content.repaint();
@@ -171,7 +172,7 @@ public class MunSocManFrame extends JFrame {
 
     public void newStudent() {
         NewStudentPanel p = new NewStudentPanel(socMan, user);
-        p.getSubmitButton().addActionListener(chooseUserAction);
+        p.getSubmitButton().addActionListener(new NewStudentActionListener(socMan, user, p, this));
         content.removeAll();
         content.add(p);
         content.revalidate();
@@ -218,7 +219,6 @@ public class MunSocManFrame extends JFrame {
         createSociety = new CreateSocietyPanel(socMan, user);
         createSociety.getHomeButton().addActionListener(homeAction);
         createSociety.getSubmitButton().addActionListener(homeAction);
-        home();
     }
 
 }

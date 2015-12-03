@@ -19,6 +19,9 @@ public class NewStudentPanel extends JPanel {
 
     private JButton submitButton;
     private Student newStudent;
+    private JTextField nameField;
+    private JTextField studentIDField;
+    private JTextField majorField;
 
     public NewStudentPanel(SocietyManager socMan, Student user) {
 
@@ -32,19 +35,13 @@ public class NewStudentPanel extends JPanel {
         content.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         JLabel nameLabel = new JLabel("Name: ");
-        JTextField nameField = new JTextField();
+        nameField = new JTextField();
         JLabel studentIDLabel = new JLabel("Student ID: ");
-        JTextField studentIDField = new JTextField();
+        studentIDField = new JTextField();
         JLabel majorLabel = new JLabel("Major: ");
-        JTextField majorField = new JTextField();
+        majorField = new JTextField();
         submitButton = new JButton("Submit");
         submitButton.setEnabled(false);
-        submitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                newStudent = new Student(nameField.getText(), studentIDField.getText(), majorField.getText());
-                socMan.addStudent(newStudent);
-            }
-        });
         CaretListener cl = new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 if ((nameField.getText().length() == 0) || (studentIDField.getText().length() == 0) || (majorField.getText().length() == 0)) submitButton.setEnabled(false);
@@ -93,5 +90,17 @@ public class NewStudentPanel extends JPanel {
 
     public Student getNewStudent() {
         return newStudent;
+    }
+
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JTextField getStudentIDField() {
+        return studentIDField;
+    }
+
+    public JTextField getMajorField() {
+        return majorField;
     }
 }
