@@ -20,7 +20,7 @@ public class NewStudentPanel extends JPanel {
     private JButton submitButton;
     private Student newStudent;
 
-    public NewStudentPanel(SocietyManager socMan) {
+    public NewStudentPanel(SocietyManager socMan, Student user) {
 
         this.setLayout(new BorderLayout());
         JLabel title = new JLabel("New Student");

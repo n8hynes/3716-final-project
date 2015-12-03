@@ -170,14 +170,8 @@ public class MunSocManFrame extends JFrame {
     }
 
     public void newStudent() {
-        NewStudentPanel p = new NewStudentPanel(socMan);
-        p.getSubmitButton().addActionListener(homeAction);
-        p.getSubmitButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                user = p.getNewStudent();
-                newUser();
-            }
-        });
+        NewStudentPanel p = new NewStudentPanel(socMan, user);
+        p.getSubmitButton().addActionListener(chooseUserAction);
         content.removeAll();
         content.add(p);
         content.revalidate();
