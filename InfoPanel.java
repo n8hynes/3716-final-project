@@ -26,7 +26,6 @@ public class InfoPanel extends JPanel {
      events.add(eventsArea);
      this.setLayout(new GridLayout(0,1));
      this.add(basicInfo);
-     this.add(board);
      this.add(events);
    }
 
@@ -44,7 +43,7 @@ public class InfoPanel extends JPanel {
      else {
        infoString += society.getName() + " is an unsanctioned society.\n";
      }
-     infoString += "Society Leader: " + soceity.getLeader().getStudent().getName() +"\n";
+     infoString += "Society Leader: " + society.getLeader().getStudent().getName() +"\n";
      infoString += "Monthly fees: $" + society.getFeeAmount();
      basicInfoArea.setText(infoString);
    }
