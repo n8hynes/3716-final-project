@@ -7,7 +7,8 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class Membership implements Serializable {
 
-    private boolean feesPaid,hasVoted;
+    private boolean feesPaid;
+    private boolean hasVoted;
     private Date dateJoined;
     private Society society;
     private Student student;
@@ -24,11 +25,9 @@ public class Membership implements Serializable {
         return feesPaid;
     }
 
-    public boolean hasVoted(){
-	return hasVoted;
+    public boolean hasVoted() {
+        return hasVoted;
     }
-
-
 
     public Date getDateJoined() {
         return dateJoined;
@@ -58,21 +57,19 @@ public class Membership implements Serializable {
         this.student = student;
     }
 
-    public void setVoted(Boolean b){
-		hasVoted = b;
+    public void setVoted(Boolean b) {
+        hasVoted = b;
     }
 
-	public void vote(Candidate c){
-
-		this.setVoted(true);
-		ArrayList<Candidate> ac = this.getSociety().getElection().getCandidateList();
-
-		for(Candidate can: ac){
-			if(can.equals(c)){
-				can.addVote();
-				return;
-			}
-		}
-	}
+    public void vote(Candidate c) {
+        this.setVoted(true);
+        ArrayList<Candidate> ac = this.getSociety().getElection().getCandidateList();
+        for(Candidate can : ac) {
+            if(can.equals(c)) {
+                can.addVote();
+                break;
+            }
+        }
+    }
 
 }
