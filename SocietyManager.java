@@ -151,6 +151,9 @@ public class SocietyManager {
         m.getSociety().removeMember(m);
         m.getStudent().removeSociety(m);
         if (m.getSociety().getMembers().size() < 20) m.getSociety().setSanctioned(false);
+        if (m.getSociety().getMembers().size() == 0){
+          removeSociety(m.getSociety());
+        }
     }
 
     public void removeMembership(Society society, Student student) {
