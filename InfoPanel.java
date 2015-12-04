@@ -38,8 +38,10 @@ public class InfoPanel extends JPanel {
      basicInfo.add(basicInfoArea);
      events.add(eventsArea);
 
-     basicInfo.setBackground(this.getBackground());
-     events.setBackground(this.getBackground());
+     basicInfoArea.setBackground(this.getBackground());
+     basicInfoArea.setEditable(false);
+     eventsArea.setBackground(this.getBackground());
+     eventsArea.setEditable(false);
 
      this.setLayout(new GridLayout(0,1));
      this.add(basicInfo);

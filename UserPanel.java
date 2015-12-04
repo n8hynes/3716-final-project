@@ -27,10 +27,20 @@ public class UserPanel extends JPanel {
     public UserPanel(SocietyManager socMan, Student user) {
         this.setLayout(new BorderLayout());
 
+        JPanel top = new JPanel();
+        top.setLayout(new GridLayout(2, 1));
         JLabel title = new JLabel("Choose User");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(title, BorderLayout.NORTH);
+        top.add(title);
+
+        JLabel current;
+        if (user != null) current = new JLabel("Current User: " + user.getName());
+        else current = new JLabel("Current User: None");
+        current.setHorizontalAlignment(SwingConstants.CENTER);
+        top.add(current);
+
+        this.add(top, BorderLayout.NORTH);
 
         content = new JPanel();
         content.setLayout(new GridBagLayout());
