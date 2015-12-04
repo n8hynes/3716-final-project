@@ -5,6 +5,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Society implements Sender, java.io.Serializable {
 
+    private Election election;
     private String name;
     private String description;
     private int feeAmount;
@@ -22,6 +23,7 @@ public class Society implements Sender, java.io.Serializable {
         events = new ArrayList<Event>();
         board = new Board();
         members = new ArrayList<Membership>();
+        this.election = null;
     }
 
     public String getName() {
@@ -101,8 +103,57 @@ public class Society implements Sender, java.io.Serializable {
         members.add(m);
     }
 
+    //Didn't make symmetric changes to addMember() to prevent
+    //multiple people joining just to vote and then leaving.
+    //I.e. once an election starts people who were members
+    // at the beginning of the election can vote.
     public void removeMember(Membership m) {
+	if (this.hasElection()){
+	    this.election.removeCandidate(m);
+	}
         members.remove(m);
     }
 
+    public boolean hasElection(){
+        return (election != null);
+    }
+
+    public Election getElection(){
+	return election;
+    }
+
+    public void startElection(){
+	election = new Election(this.members);
+    }
+
+    public void endElection(){
+        if (election == null){
+            return;
+        }
+        this.setLeader(this.election.getHighest().getMembership().getStudent());
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
