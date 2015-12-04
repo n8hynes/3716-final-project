@@ -12,6 +12,7 @@ public class SocietyManager {
 
     private ArrayList<Student> students;
     private ArrayList<Society> societies;
+	/*private ArrayList<Event> events;*/
     //Declare default storage location for .ser files
     private final String defaultStuLocation = "./Stu.ser";
     private final String defaultSocLocation = "./Soc.ser";
@@ -179,5 +180,7 @@ public class SocietyManager {
             if (society.getMembers().size() == 20 && !society.isSanctioned()) society.setSanctioned(true);
         }
     }
+	
+	
 
 }
