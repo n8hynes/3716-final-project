@@ -14,8 +14,8 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class SocietyPanel extends JPanel {
 
-    private JButton button, dialogButton;
-    private JDialog dialog;
+    private JButton button, dialogButton, infoButton;
+    private JDialog infoDialog;
 
     public SocietyPanel(Society s, Student user) {
         GridBagLayout societyLayout = new GridBagLayout();
@@ -37,11 +37,11 @@ public class SocietyPanel extends JPanel {
         membersConstraints.weightx = 1;
         membersConstraints.gridx = 2;
         membersConstraints.gridy = 0;
-	GridBagConstraints infoButtonConstraints = new GridBagConstraints();
-	infoButtonConstraints.gridwidth = 1;
-	infoButtonConstraints.weightx = 0;
-	infoButtonConstraints.gridx = 3;
-	infoButtonConstraints.gridy = 0;
+        GridBagConstraints infoButtonConstraints = new GridBagConstraints();
+        infoButtonConstraints.gridwidth = 1;
+        infoButtonConstraints.weightx = 0;
+        infoButtonConstraints.gridx = 3;
+        infoButtonConstraints.gridy = 0;
         GridBagConstraints buttonConstraints = new GridBagConstraints();
         buttonConstraints.anchor = GridBagConstraints.LINE_END;
         buttonConstraints.gridwidth = 1;
@@ -62,29 +62,32 @@ public class SocietyPanel extends JPanel {
         if (s.isSanctioned()) sanctioned.setText("* ");
         else sanctioned.setText("");
         this.add(sanctioned, sanctionedConstraints);
+
         JLabel name = new JLabel(s.getName() + ": ");
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         this.add(name, nameConstraints);
+
         JLabel members = new JLabel(s.getMembers().size() + " member(s)");
         members.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 12));
         this.add(members, membersConstraints);
+
+        infoDialog = new JDialog();
+        infoDialog.setBounds(500, 500, 500,500);
+        infoDialog.add(new InfoPanel(user, s));
+        infoButton = new JButton("View Society");
+        infoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                infoDialog.setVisible(true);
+            }
+        });
+        this.add(infoButton, infoButtonConstraints);
+
         button = new JButton();
         this.add(button, buttonConstraints);
+
         JLabel desc = new JLabel(s.getDescription());
         desc.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         this.add(desc, infoButtonConstraints);
-
-	dialog = new JDialog();
-	dialog.add(new InfoPanel(user,s));
-
-        dialogButton = new JButton("View Society");
-        dialogButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			dialog.setVisible(true);
-		}
-	});
-
-	this.add(dialogButton, infoButtonConstraints);
     }
 
     public JButton getButton() {
