@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class UserPanel extends JPanel {
@@ -27,10 +29,28 @@ public class UserPanel extends JPanel {
     public UserPanel(SocietyManager socMan, Student user) {
         this.setLayout(new BorderLayout());
 
+        JPanel top = new JPanel();
+        top.setLayout(new GridLayout(4, 1));
+        JLabel welcome = new JLabel("Welcome to MUN SOC MAN");
+        welcome.setHorizontalAlignment(SwingConstants.CENTER);
+        welcome.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        welcome.setForeground(Color.BLUE);
+        top.add(welcome);
+        top.add(new JLabel(""));
         JLabel title = new JLabel("Choose User");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        title.setForeground(Color.GRAY);
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(title, BorderLayout.NORTH);
+        top.add(title);
+        JLabel current;
+        if (user != null) current = new JLabel("Current User: " + user.getName());
+        else current = new JLabel("Current User: None");
+        current.setHorizontalAlignment(SwingConstants.CENTER);
+        current.setForeground(Color.GRAY);
+        top.add(current);
+        top.setBorder(new EmptyBorder(50, 0, 0, 0));
+
+        this.add(top, BorderLayout.NORTH);
 
         content = new JPanel();
         content.setLayout(new GridBagLayout());

@@ -20,6 +20,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MunSocManFrame extends JFrame {
@@ -37,6 +39,11 @@ public class MunSocManFrame extends JFrame {
     private ActionListener mySocietiesAction;
     private ActionListener createAction;
     private ActionListener chooseUserAction;
+    private JMenuItem homeItem;
+    private JMenuItem allSocItem;
+    private JMenuItem mySocItem;
+    private JMenuItem createSocItem;
+    private JMenuItem chooseUserItem;
 
     public MunSocManFrame() {
 
@@ -70,11 +77,11 @@ public class MunSocManFrame extends JFrame {
 
         setTitle("MunSocMan");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(500, 500, 500, 500);
+        setSize(1000, 700);
         content = new JPanel();
-        content.setBorder(new EmptyBorder(5, 5, 5, 5));
+        content.setBorder(new EmptyBorder(5, 50, 5, 50));
         content.setLayout(new BorderLayout());
-        setContentPane(content);
+        this.add(content, BorderLayout.CENTER);
 
         chooseUser = new UserPanel(socMan, user);
         chooseUser.getSubmitButton().addActionListener(new ActionListener() {
@@ -93,36 +100,51 @@ public class MunSocManFrame extends JFrame {
 
         initPanels();
 
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
+        Color menuColor = new Color(255, 127, 80);
 
-        JMenu socMenu = new JMenu("Societies");
-        socMenu.setMnemonic(KeyEvent.VK_S);
-        menuBar.add(socMenu);
+        VerticalMenuBar menuBar = new VerticalMenuBar();
 
-        JMenuItem allSocItem = new JMenuItem("All Societies");
+        homeItem = new JMenuItem("Home");
+        homeItem.setMnemonic(KeyEvent.VK_H);
+        homeItem.addActionListener(homeAction);
+        homeItem.setBackground(menuColor);
+        homeItem.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(homeItem);
+
+        allSocItem = new JMenuItem("All Societies");
         allSocItem.setMnemonic(KeyEvent.VK_A);
         allSocItem.addActionListener(allSocietiesAction);
-        socMenu.add(allSocItem);
+        allSocItem.setBackground(menuColor);
+        allSocItem.setHorizontalAlignment(SwingConstants.CENTER);
+        if (user == null) allSocItem.setEnabled(false);
+        menuBar.add(allSocItem);
 
-        JMenuItem mySocItem = new JMenuItem("My Societies");
+        mySocItem = new JMenuItem("My Societies");
         mySocItem.setMnemonic(KeyEvent.VK_M);
         mySocItem.addActionListener(mySocietiesAction);
-        socMenu.add(mySocItem);
+        mySocItem.setBackground(menuColor);
+        mySocItem.setHorizontalAlignment(SwingConstants.CENTER);
+        if (user == null) mySocItem.setEnabled(false);
+        menuBar.add(mySocItem);
 
-        JMenuItem createSocItem = new JMenuItem("Create Society");
+        createSocItem = new JMenuItem("Create Society");
         createSocItem.setMnemonic(KeyEvent.VK_C);
         createSocItem.addActionListener(createAction);
-        socMenu.add(createSocItem);
+        createSocItem.setBackground(menuColor);
+        createSocItem.setHorizontalAlignment(SwingConstants.CENTER);
+        if (user == null) createSocItem.setEnabled(false);
+        menuBar.add(createSocItem);
 
-        JMenu userMenu = new JMenu("Users");
-        userMenu.setMnemonic(KeyEvent.VK_U);
-        menuBar.add(userMenu);
-
-        JMenuItem chooseUserItem = new JMenuItem("Choose User");
+        chooseUserItem = new JMenuItem("Switch User");
         chooseUserItem.setMnemonic(KeyEvent.VK_L);
         chooseUserItem.addActionListener(chooseUserAction);
-        userMenu.add(chooseUserItem);
+        chooseUserItem.setBackground(menuColor);
+        chooseUserItem.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(chooseUserItem);
+
+        menuBar.setBackground(menuColor);
+
+        this.add(menuBar, BorderLayout.WEST);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -180,10 +202,7 @@ public class MunSocManFrame extends JFrame {
     }
 
     public void initPanels() {
-        home = new HomePanel(socMan);
-        home.getAllSocButton().addActionListener(allSocietiesAction);
-        home.getMySocButton().addActionListener(mySocietiesAction);
-        home.getCreateSocButton().addActionListener(createAction);
+        home = new HomePanel(socMan, user);
 
         allSocieties = new AllSocietiesPanel(socMan, user);
         allSocieties.getHomeButton().addActionListener(homeAction);
@@ -210,6 +229,14 @@ public class MunSocManFrame extends JFrame {
                 newStudent();
             }
         });
+
+        if (user != null) {
+            allSocItem.setEnabled(true);
+            mySocItem.setEnabled(true);
+            createSocItem.setEnabled(true);
+        }
+
+        home = new HomePanel(socMan, user);
 
         allSocieties = new AllSocietiesPanel(socMan, user);
         allSocieties.getHomeButton().addActionListener(homeAction);

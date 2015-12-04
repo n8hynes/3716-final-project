@@ -27,6 +27,9 @@ public class CreateSocietyPanel extends JPanel {
     public CreateSocietyPanel(SocietyManager socMan, Student user) {
 
         this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        EmptyBorder smallBorder = new EmptyBorder(5, 5, 5, 5);
+
         JLabel title = new JLabel("Create Society");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -97,6 +100,7 @@ public class CreateSocietyPanel extends JPanel {
         c.weightx = 0;
         c.weighty = 0;
         c.gridwidth = 1;
+        homeButton.setBorder(smallBorder);
         form.add(homeButton, c);
 
         submitButton = new JButton("Submit");
@@ -116,6 +120,7 @@ public class CreateSocietyPanel extends JPanel {
         c.gridy = 3;
         c.weighty = 0;
         c.weighty = 0;
+        submitButton.setBorder(smallBorder);
         form.add(submitButton, c);
 
         this.add(form, BorderLayout.CENTER);

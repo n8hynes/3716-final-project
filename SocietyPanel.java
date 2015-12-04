@@ -72,7 +72,8 @@ public class SocietyPanel extends JPanel {
         this.add(members, membersConstraints);
 
         infoDialog = new JDialog();
-        infoDialog.setBounds(500, 500, 500,500);
+        infoDialog.setTitle(s.getName());
+        infoDialog.setBounds(500, 500, 500, 500);
         infoDialog.add(new InfoPanel(user, s));
         infoButton = new JButton("View Society");
         infoButton.addActionListener(new ActionListener() {
