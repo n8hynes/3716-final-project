@@ -12,7 +12,6 @@ public class SocietyManager {
 
     private ArrayList<Student> students;
     private ArrayList<Society> societies;
-	/*private ArrayList<Event> events;*/
     //Declare default storage location for .ser files
     private final String defaultStuLocation = "./Stu.ser";
     private final String defaultSocLocation = "./Soc.ser";
@@ -151,7 +150,14 @@ public class SocietyManager {
     public void removeMembership(Membership m) {
         m.getSociety().removeMember(m);
         m.getStudent().removeSociety(m);
-        if (m.getSociety().getMembers().size() < 20) m.getSociety().setSanctioned(false);
+        if (m.getSociety().getMembers().size() < 20) {
+          m.getSociety().setSanctioned(false);
+          if (m.getSociety().hasElection()) {
+            Membership tempLeader = m.getSociety().getLeader();
+            m.getSociety().endElection();
+            m.getSociety().setLeader(tempLeader);
+          }
+        }
         if (m.getSociety().getMembers().size() == 0){
           removeSociety(m.getSociety());
         }
@@ -180,7 +186,5 @@ public class SocietyManager {
             if (society.getMembers().size() == 20 && !society.isSanctioned()) society.setSanctioned(true);
         }
     }
-	
-	
 
 }
