@@ -1,6 +1,7 @@
 package MunSocMan;
 
 import java.util.Date;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
@@ -26,6 +27,8 @@ public class Membership implements Serializable {
     public boolean hasVoted(){
 	return hasVoted;
     }
+	
+	
 
     public Date getDateJoined() {
         return dateJoined;
@@ -55,8 +58,21 @@ public class Membership implements Serializable {
         this.student = student;
     }
 
-    public void setVoted(){
-	hasV	oted = true;
+    public void setVoted(Boolean b){
+		hasVoted = b;
     }
+	
+	public void vote(Candidate c){
+		
+		this.setVoted(true);
+		ArrayList<Candidate> ac = this.getSociety().getElection().getCandidateList();
+		
+		for(Candidate can: ac){
+			if(can.equals(c)){
+				can.addVote();
+				return;
+			}
+		}
+	}
 
 }

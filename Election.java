@@ -7,8 +7,8 @@ public class Election{
 	
 	//The constructor gets a membership list and creates a new list made of candidate objects.
 	public Election(ArrayList<Membership> list){
-		for(int i = 0; i < list.size();  i++){
-			this.candidates[i]= new Candidate(list[i]);
+		for(Membership i : list){
+			this.candidates.add(new Candidate(i));
 		}
 	}
 	
@@ -18,19 +18,20 @@ public class Election{
 	}
 	
 	//setter methods
+	/*
 	public void setCandidateList(ArrayList<Candidate> list){
-		for(int i = 0; i < list.size();  i++){
-			this.candidates[i]= new Candidate(list[i]);
+		for(Candidate l:){
+			this.candidates.add(new Candidate(i));
 		}
 	}
-	
+	*/
 	//remove candidate
 	
 	public void removeCandidate(Membership member){
 		
 		for(int i = 0; i < this.candidates.size();  i++){
-			if(this.candidates[i].getMembership().equals(member)){
-				this.candidates.remove(this.candidates[i]);
+			if(this.candidates.get(i).getMembership().equals(member)){
+				this.candidates.remove(this.candidates.get(i));
 				i = this.candidates.size();
 			}
 		} 
@@ -38,7 +39,7 @@ public class Election{
 	
 	//Count
 	public Candidate getHighest(){
-		Candidate higestSoFar = this.candidates.get(0);
+		Candidate highestSoFar = this.candidates.get(0);
 
 		for (Candidate c : this.candidates){
 			if (c.getCount() > highestSoFar.getCount()){

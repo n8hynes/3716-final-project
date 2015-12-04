@@ -130,7 +130,7 @@ public class Society implements Sender, java.io.Serializable {
         if (election == null){
             return;
         }
-        this.setLeader(this.election.getHighest());
+        this.setLeader(this.election.getHighest().getMembership().getStudent());
     }
 }
 

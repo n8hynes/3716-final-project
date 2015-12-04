@@ -1,6 +1,8 @@
+package MunSocMan;
+
 public class Candidate{
 	private Membership membership;
-	private int num_vote;
+	private int vote;
 	public Candidate(Membership m){
 		this.membership =m;
 		this.vote =0;
@@ -9,9 +11,13 @@ public class Candidate{
 		vote++;
 	}
 	public int getCount(){
-		return num_vote;
+		return vote;
 	}
 	public Membership getMembership(){
 		return membership;
+	}
+	
+	public String toString(){
+		return this.membership.getStudent().getName();
 	}
 }
