@@ -6,7 +6,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Membership implements Serializable {
 
-    private boolean feesPaid;
+    private boolean feesPaid,hasVoted;
     private Date dateJoined;
     private Society society;
     private Student student;
@@ -21,6 +21,10 @@ public class Membership implements Serializable {
 
     public boolean isFeesPaid() {
         return feesPaid;
+    }
+
+    public boolean hasVoted(){
+	return hasVoted;
     }
 
     public Date getDateJoined() {
@@ -49,6 +53,10 @@ public class Membership implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public void setVoted(){
+	hasV	oted = true;
     }
 
 }
