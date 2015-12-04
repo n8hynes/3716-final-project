@@ -12,11 +12,11 @@ public class SocietyManager {
 
     private ArrayList<Student> students;
     private ArrayList<Society> societies;
-    //Declare default storage location for .ser files
+    // Declare default storage location for .ser files
     private final String defaultStuLocation = "./Stu.ser";
     private final String defaultSocLocation = "./Soc.ser";
 
-    //Read serialized files of students and societies
+    // Read serialized files of students and societies
     public SocietyManager() {
         File stuFile,socFile;
         FileInputStream stuInputStream = null;
@@ -26,14 +26,14 @@ public class SocietyManager {
         try {
             stuFile = new File(defaultStuLocation);
             socFile = new File(defaultSocLocation);
-            if (stuFile.isFile()){
+            if (stuFile.isFile()) {
                 stuInputStream = new FileInputStream(stuFile);
                 stuIn = new ObjectInputStream(stuInputStream);
                 @SuppressWarnings("unchecked")
                 ArrayList<Student> deserializedStu = (ArrayList<Student>) stuIn.readObject();
                 students = deserializedStu;
             }
-            if (socFile.isFile()){
+            if (socFile.isFile()) {
                 socInputStream = new FileInputStream(socFile);
                 socIn = new ObjectInputStream(socInputStream);
                 @SuppressWarnings("unchecked")
@@ -41,47 +41,47 @@ public class SocietyManager {
                 societies = deserializedSoc;
             }
         }
-        //IOException, ClassNotFoundException
-        catch (Exception e){
+        // IOException, ClassNotFoundException
+        catch (Exception e) {
             e.printStackTrace();
-            if (students == null){
+            if (students == null) {
                 students = new ArrayList<Student>();
             }
-            if (societies == null){
+            if (societies == null) {
                 societies = new ArrayList<Society>();
             }
         }
         //Close all streams and initialize empty students and
         //societies ArrayLists if serialization fails
         finally {
-            if (students == null){
+            if (students == null) {
                 students = new ArrayList<Student>();
             }
-            if (societies == null){
+            if (societies == null) {
                 societies = new ArrayList<Society>();
             }
             try {
-                if (stuInputStream != null){
+                if (stuInputStream != null) {
                     stuInputStream.close();
                 }
-                if (socInputStream != null){
+                if (socInputStream != null) {
                     socInputStream.close();
                 }
-                if (stuIn != null){
+                if (stuIn != null) {
                     stuIn.close();
                 }
-                if (socIn != null){
+                if (socIn != null) {
                     socIn.close();
                 }
             }
-            catch (IOException ex){
+            catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }
 
     //Write current students and societies ArrayLists to default .ser file locations
-    public void save(){
+    public void save() {
         FileOutputStream stuOutputStream = null;
         FileOutputStream socOutputStream = null;
         ObjectOutputStream stuOut = null;
@@ -95,25 +95,25 @@ public class SocietyManager {
             socOut.writeObject(societies);
         }
         //IOException, FileNotFoundException
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
         }
         finally {
             try {
-                if (stuOutputStream != null){
+                if (stuOutputStream != null) {
                     stuOutputStream.close();
                 }
-                if (socOutputStream != null){
+                if (socOutputStream != null) {
                     socOutputStream.close();
                 }
-                if (stuOut != null){
+                if (stuOut != null) {
                     stuOut.close();
                 }
-                if (socOut != null){
+                if (socOut != null) {
                     socOut.close();
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex) {
                 ex.printStackTrace();
             }
         }

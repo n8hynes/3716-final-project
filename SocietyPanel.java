@@ -1,24 +1,28 @@
 package MunSocMan;
-import javax.swing.JDialog;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Font;
-import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 @SuppressWarnings("serial")
 public class SocietyPanel extends JPanel {
 
-    private JButton button, dialogButton, infoButton;
+    private JButton button;
+    private JButton dialogButton;
+    private JButton infoButton;
     private JDialog infoDialog;
 
     public SocietyPanel(Society s, Student user) {
+
         GridBagLayout societyLayout = new GridBagLayout();
+
         GridBagConstraints sanctionedConstraints = new GridBagConstraints();
         sanctionedConstraints.anchor = GridBagConstraints.LINE_START;
         sanctionedConstraints.gridwidth = 1;
@@ -88,7 +92,7 @@ public class SocietyPanel extends JPanel {
 
         JLabel desc = new JLabel(s.getDescription());
         desc.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
-        this.add(desc, infoButtonConstraints);
+        this.add(desc, descConstraints);
     }
 
     public JButton getButton() {

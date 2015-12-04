@@ -1,7 +1,7 @@
 package MunSocMan;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class Board implements Serializable {

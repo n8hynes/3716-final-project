@@ -1,21 +1,21 @@
 package MunSocMan;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JTextArea;
-import javax.swing.JOptionPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.CaretEvent;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class CreateSocietyPanel extends JPanel {

@@ -1,8 +1,8 @@
 package MunSocMan;
 
-import javax.swing.JMenuBar;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import javax.swing.JMenuBar;
 
 @SuppressWarnings("serial")
 public class VerticalMenuBar extends JMenuBar {

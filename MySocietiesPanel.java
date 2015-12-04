@@ -1,16 +1,16 @@
 package MunSocMan;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Font;
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class MySocietiesPanel extends JPanel {
@@ -19,20 +19,24 @@ public class MySocietiesPanel extends JPanel {
     private JButton homeButton;
 
     public MySocietiesPanel(SocietyManager socMan, Student user) {
+
         list = new JPanel();
         if (user != null) {
             getList(socMan, user, user.getSocieties().size());
         }
+
         this.setLayout(new BorderLayout());
+
         JLabel title = new JLabel("My Societies");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(title, BorderLayout.NORTH);
+
         JScrollPane scroll = new JScrollPane(list);
         this.add(scroll, BorderLayout.CENTER);
+
         homeButton = new JButton("Home");
         this.add(homeButton, BorderLayout.SOUTH);
-
 
     }
 

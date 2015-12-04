@@ -1,26 +1,17 @@
 package MunSocMan;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.ScrollPane;
-import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.KeyEvent;
-import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
@@ -136,7 +127,7 @@ public class MunSocManFrame extends JFrame {
         menuBar.add(createSocItem);
 
         chooseUserItem = new JMenuItem("Switch User");
-        chooseUserItem.setMnemonic(KeyEvent.VK_L);
+        chooseUserItem.setMnemonic(KeyEvent.VK_S);
         chooseUserItem.addActionListener(chooseUserAction);
         chooseUserItem.setBackground(menuColor);
         chooseUserItem.setHorizontalAlignment(SwingConstants.CENTER);
@@ -205,13 +196,10 @@ public class MunSocManFrame extends JFrame {
         home = new HomePanel(socMan, user);
 
         allSocieties = new AllSocietiesPanel(socMan, user);
-        allSocieties.getHomeButton().addActionListener(homeAction);
 
         mySocieties = new MySocietiesPanel(socMan, user);
-        mySocieties.getHomeButton().addActionListener(homeAction);
 
         createSociety = new CreateSocietyPanel(socMan, user);
-        createSociety.getHomeButton().addActionListener(homeAction);
         createSociety.getSubmitButton().addActionListener(homeAction);
     }
 
@@ -239,13 +227,12 @@ public class MunSocManFrame extends JFrame {
         home = new HomePanel(socMan, user);
 
         allSocieties = new AllSocietiesPanel(socMan, user);
-        allSocieties.getHomeButton().addActionListener(homeAction);
+        allSocieties.update(socMan, user);
 
         mySocieties = new MySocietiesPanel(socMan, user);
-        mySocieties.getHomeButton().addActionListener(homeAction);
+        mySocieties.update(socMan, user);
 
         createSociety = new CreateSocietyPanel(socMan, user);
-        createSociety.getHomeButton().addActionListener(homeAction);
         createSociety.getSubmitButton().addActionListener(homeAction);
     }
 

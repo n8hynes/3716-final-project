@@ -1,7 +1,7 @@
 package MunSocMan;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Membership implements Serializable {

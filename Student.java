@@ -1,14 +1,15 @@
 package MunSocMan;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Student implements java.io.Serializable {
+public class Student implements Serializable {
 
+    private ArrayList<Membership> societies;
+    private String name;
     private String studentID;
     private String major;
-    private String name;
-    private ArrayList<Membership> societies;
 
     public Student(String name, String studentID, String major) {
         this.name = name;
@@ -29,29 +30,20 @@ public class Student implements java.io.Serializable {
         return studentID;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public ArrayList<Membership> getSocieties() {
-        return societies;
-    }
-
-    public boolean isMember(Society society){
-	for (Membership m : this.societies){
-		if (m.getSociety().equals(society)){
-			return true;
-		}
-	}
-	return false;
-    }
-
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
+    public String getMajor() {
+        return major;
+    }
+
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public ArrayList<Membership> getSocieties() {
+        return societies;
     }
 
     public void addSociety(Membership m) {
@@ -60,6 +52,15 @@ public class Student implements java.io.Serializable {
 
     public void removeSociety(Membership m) {
         societies.remove(m);
+    }
+
+    public boolean isMember(Society society) {
+        for (Membership m : this.societies) {
+            if (m.getSociety().equals(society)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
