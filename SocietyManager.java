@@ -151,15 +151,15 @@ public class SocietyManager {
         m.getSociety().removeMember(m);
         m.getStudent().removeSociety(m);
         if (m.getSociety().getMembers().size() < 20) {
-          m.getSociety().setSanctioned(false);
-          if (m.getSociety().hasElection()) {
-            Membership tempLeader = m.getSociety().getLeader();
-            m.getSociety().endElection();
-            m.getSociety().setLeader(tempLeader);
-          }
+            m.getSociety().setSanctioned(false);
+            if (m.getSociety().hasElection()) {
+                Membership tempLeader = m.getSociety().getLeader();
+                m.getSociety().endElection();
+                m.getSociety().setLeader(tempLeader);
+            }
         }
         if (m.getSociety().getMembers().size() == 0){
-          removeSociety(m.getSociety());
+            removeSociety(m.getSociety());
         }
     }
 
