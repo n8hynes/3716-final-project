@@ -21,6 +21,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MunSocManFrame extends JFrame {
@@ -107,12 +108,14 @@ public class MunSocManFrame extends JFrame {
         homeItem.setMnemonic(KeyEvent.VK_H);
         homeItem.addActionListener(homeAction);
         homeItem.setBackground(menuColor);
+        homeItem.setHorizontalAlignment(SwingConstants.CENTER);
         menuBar.add(homeItem);
 
         allSocItem = new JMenuItem("All Societies");
         allSocItem.setMnemonic(KeyEvent.VK_A);
         allSocItem.addActionListener(allSocietiesAction);
         allSocItem.setBackground(menuColor);
+        allSocItem.setHorizontalAlignment(SwingConstants.CENTER);
         if (user == null) allSocItem.setEnabled(false);
         menuBar.add(allSocItem);
 
@@ -120,6 +123,7 @@ public class MunSocManFrame extends JFrame {
         mySocItem.setMnemonic(KeyEvent.VK_M);
         mySocItem.addActionListener(mySocietiesAction);
         mySocItem.setBackground(menuColor);
+        mySocItem.setHorizontalAlignment(SwingConstants.CENTER);
         if (user == null) mySocItem.setEnabled(false);
         menuBar.add(mySocItem);
 
@@ -127,6 +131,7 @@ public class MunSocManFrame extends JFrame {
         createSocItem.setMnemonic(KeyEvent.VK_C);
         createSocItem.addActionListener(createAction);
         createSocItem.setBackground(menuColor);
+        createSocItem.setHorizontalAlignment(SwingConstants.CENTER);
         if (user == null) createSocItem.setEnabled(false);
         menuBar.add(createSocItem);
 
@@ -134,6 +139,7 @@ public class MunSocManFrame extends JFrame {
         chooseUserItem.setMnemonic(KeyEvent.VK_L);
         chooseUserItem.addActionListener(chooseUserAction);
         chooseUserItem.setBackground(menuColor);
+        chooseUserItem.setHorizontalAlignment(SwingConstants.CENTER);
         menuBar.add(chooseUserItem);
 
         menuBar.setBackground(menuColor);
@@ -224,9 +230,11 @@ public class MunSocManFrame extends JFrame {
             }
         });
 
-        allSocItem.setEnabled(true);
-        mySocItem.setEnabled(true);
-        createSocItem.setEnabled(true);
+        if (user != null) {
+            allSocItem.setEnabled(true);
+            mySocItem.setEnabled(true);
+            createSocItem.setEnabled(true);
+        }
 
         home = new HomePanel(socMan, user);
 

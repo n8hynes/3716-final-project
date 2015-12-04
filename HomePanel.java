@@ -23,6 +23,8 @@ public class HomePanel extends JPanel {
         JLabel userLabel;
         if (user != null) userLabel = new JLabel("Hello, " + user.getName() + "!");
         else userLabel = new JLabel("Please log in.");
+        userLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        userLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         this.add(userLabel);
     }
 
